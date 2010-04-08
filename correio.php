@@ -80,14 +80,14 @@ class Correio {
 					}
 
 					// Adiciona o item na lista de rastreamento
-					$track[] = $tmp;
+					$track[] = (object)$tmp;
 				}else if (preg_match("@<td colspan=2>(.*)</td>@", $item[0], $d)){
 					// Se for um encaminhamento, armazena para o proximo item
 					$temp = $d[1];
 				}
 				$this->status = $tmp['acao'];
 			}
-			$this->track = json_decode(json_encode($track));
+			$this->track = $track;
 			return;
 		}
 
