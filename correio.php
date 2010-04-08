@@ -18,7 +18,7 @@ class Correio {
 	}
 
 	private function track($id){
-		$html = file_get_contents('http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=' . $id);
+		$html = utf8_encode(file_get_contents('http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=' . $id));
 
 		// Verifica se o objeto ainda não foi postado, caso seja o caso, retorna erro e mensagem		
 		if (strstr($html, '<table') === false){
@@ -48,12 +48,12 @@ class Correio {
 						'data_sql' => preg_replace('@([0-9]{2})/([0-9]{2})/([0-9]{4}) ([0-9]{2}):([0-9]{2})@', '$3-$2-$1 $4:$5:00',$d[1] ),
 						'local' => $d[2],
 						'acao' => strtolower($d[3]),
-						'encaminhado' => ''
+						'detalhes' => ''
 					);
 
 					// Se tiver um encaminhamento armazenado
 					if ($temp){
-						$tmp['encaminhado'] = $temp;
+						$tmp['detalhes'] = $temp;
 						$temp = null;
 					}
 
@@ -65,7 +65,7 @@ class Correio {
 				}
 				$this->status = $tmp['acao'];
 			}
-			$this->track = $track;
+			$this->track = json_decode(json_encode($track));
 			return;
 		}
 
