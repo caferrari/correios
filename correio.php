@@ -2,11 +2,11 @@
 
 class Correio {
 
-	public $hash;
-	public $track;
 	public $status;
+	public $hash;
 	public $erro = false;
-
+	public $track;
+	
 	public function __construct($id=false){
 		if ($id){
 			if (strlen($id) == 13) $this->track ($id);
