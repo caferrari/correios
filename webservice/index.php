@@ -6,12 +6,15 @@
 //  http://127.0.0.1/correio/webservice/?q=PB151832535BR&f=dump
 //  http://127.0.0.1/correio/webservice/?q=PB151832535BR&f=serial
 //  http://127.0.0.1/correio/webservice/?q=PB151832535BR&f=xml
+//  e finalmente, para amantes de Ajax:
+//	http://localhost/correio/webservice/?q=PB151832535BR&jsonp=minhaFuncJs
 
 include '../correio.php';
 
 // Carrega o código carregado por query-string
 $codigo = @$_REQUEST['q'];
 $formato = @$_REQUEST['f'];
+$jsonp = @$_REQUEST['jsonp'];
 
 // valida o formato
 if (!preg_match('@json|serial|dump|xml@', $formato)) $formato = 'json';
@@ -57,5 +60,6 @@ switch ($formato){
 		exit(x2xml($obj));
 	case 'json':
 	default:
+		if ($jsonp) exit ($jsonp . '(' . json_encode($obj) . ')');
 		exit (json_encode($obj));
 }
