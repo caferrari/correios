@@ -1,12 +1,28 @@
 <?php
+/* 
+ * Copyright (c) 2010, Carlos André Ferrari <[carlos@]ferrari.eti.br>
+ * All rights reserved. 
+ */
 
+/**
+ * Correio Class
+ *
+ * @author	Carlos André Ferrari <carlos@ferrari.eti.br>
+ */
+ 
 class Correio {
 
 	public $status;
 	public $hash;
 	public $erro = false;
 	public $track;
-	
+
+	/**
+	* Construtor
+	*
+	* @param	string	$id		Código da encomenda
+	* return void
+	*/
 	public function __construct($id=false){
 		if ($id){
 			if (strlen($id) == 13) $this->track ($id);
@@ -17,6 +33,12 @@ class Correio {
 		}
 	}
 
+	/**
+	* Faz o rastreamendo da encomenda
+	*
+	* @param	string	$id		Código da encomenda
+	* @return	void
+	*/
 	private function track($id){
 		$html = utf8_encode(file_get_contents('http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=' . $id));
 
