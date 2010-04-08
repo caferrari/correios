@@ -1,5 +1,5 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 
 	<head>
@@ -10,7 +10,7 @@
 		<h1>Rastreamento</h1>
 		<?php
 		include 'correio.php';
-		$c = json_decode(file_get_contents('http://127.0.0.1/correio/webservice/?q=PB151832535BR'));
+		$c = json_decode(file_get_contents('http://ferrari.eti.br/correios/webservice/?q=PB151832535BR'));
 		if (!$c->erro):
 		?>
 
