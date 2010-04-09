@@ -14,7 +14,7 @@ include '../correio.php';
 // Carrega o código carregado por query-string
 $codigo = @$_REQUEST['q'];
 $formato = @$_REQUEST['f'];
-$jsonp = @$_REQUEST['jsonp'];
+$jsonp = @$_REQUEST['callback'];
 
 // valida o formato
 if (!preg_match('@json|serial|dump|xml@', $formato)) $formato = 'json';
