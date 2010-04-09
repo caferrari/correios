@@ -25,7 +25,7 @@ $obj = null;
 // Valida o código
 if (preg_match('@[A-Z0-9]{13}@', $codigo)){
 	// Cria nome de arquivo de cache
-	$cache_file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $codigo . $formato;
+	$cache_file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $codigo ;
 
 	// Se o cache existir e tiver menos de 5 minutos de vida
 	if (file_exists($cache_file) && date('U') - filemtime($cache_file) < 300){
@@ -53,7 +53,8 @@ switch ($formato){
 	case 'serial':
 		exit (serialize($obj));
 	case 'dump':
-		exit (print_r($obj));
+		print_r($obj)
+		exit ();
 	case 'xml':
 		header("Content-Type: text/xml");
 		include 'x2xml.php';
