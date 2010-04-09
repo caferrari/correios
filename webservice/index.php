@@ -53,7 +53,7 @@ switch ($formato){
 	case 'serial':
 		exit (serialize($obj));
 	case 'dump':
-		print_r($obj)
+		print_r($obj);
 		exit ();
 	case 'xml':
 		header("Content-Type: text/xml");
