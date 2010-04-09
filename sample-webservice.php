@@ -7,10 +7,21 @@
 	</head>
 
 	<body>
-		<h1>Rastreamento</h1>
 		<?php
+			$code = @$_REQUEST['code'];
+		?>
+		<h1>Rastreamento<?php echo $code ? ': ' . $code : ''?></h1>
+		
+		<form>
+		<fieldset><legend>Pesquisar</legend>
+			<p><label>Código para rastreamento:</label> <input type="text" size="14" maxlength="13" name="code" value="<?php echo $code ? $code : 'PB151832535BR'?>" />
+			<button>Pesquisar!</button>
+		</fieldset>
+		</form>
+		<?php
+		if ($code):
 		include 'correio.php';
-		$c = json_decode(file_get_contents('http://ferrari.eti.br/correios/webservice/?q=PB151832535BR'));
+		$c = json_decode(file_get_contents('http://ferrari.eti.br/correios/webservice/?q=' . $code));
 		if (!$c->erro):
 		?>
 
@@ -34,6 +45,6 @@
 		</table>
 		<?php else: ?>
 		<?php echo $c->erro_msg ?>
-		<?php endif; ?>
+		<?php endif; endif;?>
 	</body>
 </html>
