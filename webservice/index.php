@@ -22,6 +22,9 @@ $obj = null;
 
 // Valida o código
 if (preg_match('@[A-Z0-9]{13}@', $codigo)){
+	// incluimos a classe
+	include_once '../correio.php';
+
 	// Cria nome de arquivo de cache
 	$cache_file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $codigo ;
 
@@ -31,8 +34,6 @@ if (preg_match('@[A-Z0-9]{13}@', $codigo)){
 		$obj = unserialize(file_get_contents($cache_file));
 		$obj->cached = true;
 	}else{
-		// incluimos a classe
-		include_once '../correio.php';
 		// Senão, consulta...
 		$obj = new Correio($codigo);
 		// .. e renova o cache
