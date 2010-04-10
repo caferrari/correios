@@ -4,6 +4,7 @@
 
 	<head>
 		<title>Rastreamento nos correios</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 
 	<body>
@@ -20,7 +21,6 @@
 		</form>
 		<?php
 		if ($code):
-		include 'correio.php';
 		$c = json_decode(file_get_contents('http://ferrari.eti.br/correios/webservice/?q=' . $code));
 		if (!$c->erro):
 		?>

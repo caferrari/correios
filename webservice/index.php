@@ -9,12 +9,10 @@
 //  e finalmente, para amantes de Ajax:
 //	http://ferrari.eti.br/correios/webservice/?q=PB151832535BR&jsonp=minhaFuncJs
 
-include '../correio.php';
-
-// Carrega o código carregado por query-string
-$codigo = @$_REQUEST['q'];
-$formato = @$_REQUEST['f'];
-$jsonp = @$_REQUEST['callback'];
+// Carrega o código carregado por query-string e outros parametros
+$codigo = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+$formato = isset($_REQUEST['f']) ? $_REQUEST['f'] : '';
+$jsonp = isset($_REQUEST['callback']) ? $_REQUEST['callback'] : '';
 
 // valida o formato
 if (!preg_match('@json|serial|dump|xml@', $formato)) $formato = 'json';
@@ -33,6 +31,8 @@ if (preg_match('@[A-Z0-9]{13}@', $codigo)){
 		$obj = unserialize(file_get_contents($cache_file));
 		$obj->cached = true;
 	}else{
+		// incluimos a classe
+		include_once '../correio.php';
 		// Senão, consulta...
 		$obj = new Correio($codigo);
 		// .. e renova o cache
@@ -57,7 +57,7 @@ switch ($formato){
 		exit ();
 	case 'xml':
 		header("Content-Type: text/xml");
-		include 'x2xml.php';
+		include_once 'x2xml.php';
 		exit(x2xml($obj));
 	case 'json':
 	default:

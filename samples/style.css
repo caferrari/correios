@@ -1,0 +1,18 @@
+
+body {
+	font: 0.8em Sans #333;
+}
+
+table tr:nth-child(odd) {
+	background: #eee;
+}
+
+table tr:nth-child(1) { 
+	background: #ddd;
+}
+
+table td {
+	padding: 3px;
+}
+
+
