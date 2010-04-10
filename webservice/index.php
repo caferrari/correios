@@ -2,12 +2,12 @@
 
 // WebService Rest de uso da classe com cache
 // use: 
-//	http://ferrari.eti.br/correios/webservice/?q=PB151832535BR
+//  http://ferrari.eti.br/correios/webservice/?q=PB151832535BR
 //  http://ferrari.eti.br/correios/webservice/?q=PB151832535BR&f=dump
 //  http://ferrari.eti.br/correios/webservice/?q=PB151832535BR&f=serial
 //  http://ferrari.eti.br/correios/webservice/?q=PB151832535BR&f=xml
 //  e finalmente, para amantes de Ajax:
-//	http://ferrari.eti.br/correios/webservice/?q=PB151832535BR&jsonp=minhaFuncJs
+//  http://ferrari.eti.br/correios/webservice/?q=PB151832535BR&callback=minhaFuncJs
 
 // Carrega o código carregado por query-string e outros parametros
 $codigo = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
