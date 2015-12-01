@@ -84,6 +84,7 @@ class Correio {
 				}else if (preg_match("@<td colspan=2>(.*)</td>@", $item[0], $d)){
 					// Se for um encaminhamento, armazena para o proximo item
 					$temp = $d[1];
+					continue;
 				}
 				$this->status = $tmp['acao'];
 			}
